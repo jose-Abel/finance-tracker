@@ -3,17 +3,25 @@ require 'net/http'
 require 'json'
 
 class Stock < ApplicationRecord
-  
-  def self.look_up(ticker_symbol)  
+
+  def self.look_up(ticker_symbol)
+    new_name = ''
+    new_symbol = ''
+    new_price = 0
     stocks = Stock.new
-    coins_hash = stocks.listings 
+    coins_hash = stocks.listings
+
     coins_hash.each do |hash|
-      hash.each do |key, value|
-        if ticker_symbol == key
-          return value.round(2)
+      hash.each do |name, price|
+        if ticker_symbol == name
+          new_name = name
+          new_symbol = hash['symbol']
+          new_price = price.round(2)
         end
       end
     end
+    
+    new(name: new_name, last_price: new_price, ticker: new_symbol)
   end
   
   def listings
@@ -22,7 +30,10 @@ class Stock < ApplicationRecord
     i = 0
     while i < latest_listings_hash["data"].length
       new_hash = Hash.new(0)
+
       new_hash[latest_listings_hash['data'][i]['name']] = latest_listings_hash['data'][i]['quote']['USD']['price']
+
+      new_hash["symbol"] = latest_listings_hash['data'][i]['symbol']
 
       new_arr << new_hash
       i += 1

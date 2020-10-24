@@ -84,6 +84,8 @@ GEM
     devise-bootstrap-views (1.1.0)
     erubi (1.9.0)
     ffi (1.13.1-x64-mingw32)
+    font-awesome-rails (4.7.0.5)
+      railties (>= 3.2, < 6.1)
     globalid (0.4.2)
       activesupport (>= 4.2.0)
     i18n (1.8.5)
@@ -211,6 +213,7 @@ DEPENDENCIES
   capybara (>= 2.15)
   devise
   devise-bootstrap-views (~> 1.0)
+  font-awesome-rails
   jbuilder (~> 2.7)
   json
   pg

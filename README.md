@@ -17,6 +17,7 @@ A Finance Tracker web application built following the guide in the Udemy course 
 - devise
 - devise-bootstrap-view
 - json
+- font-awesome-rails
 
 ### Additional yarn packages
 - bootstrap
@@ -24,8 +25,8 @@ A Finance Tracker web application built following the guide in the Udemy course 
 - popper
 
 ## Authors
-### Author1
 - 👤GitHub: [Jose Abel Ramirez](https://github.com/jose-Abel)
+- Linkedin: [Jose Abel Ramirez Frontany](https://www.linkedin.com/in/jose-abel-ramirez-frontany-7674a842/)
 
 
 ## Getting Started
@@ -40,10 +41,6 @@ In the terminal, to have all the gems and packages to reproduce this project, ru
 
 ## Live version
 https://jose-abel-finance-tracker.herokuapp.com/
-
-
-### Setup
-You can either copy the code with git clone or just do a git pull on your local environment. In order to run this web app locally you have to do "rails server" so the local sql lite server start.
 
 
 ### Acknowledgments
