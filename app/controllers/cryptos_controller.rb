@@ -1,7 +1,24 @@
 class CryptosController < ApplicationController
 
   def search
-    @crypto = Stock.look_up(params[:crypto])
-    render 'users/my_portfolio'
+    if params[:crypto].present?
+      @crypto = Stock.look_up(params[:crypto])
+      
+      if @crypto
+        respond_to do |format|
+          format.js { render partial: 'users/result' }
+        end
+      else
+        respond_to do |format|
+          flash.now[:alert] = "Please enter a valid name to search"
+          format.js { render partial: 'users/result' }
+        end
+      end
+    else
+      respond_to do |format|
+        flash.now[:alert] = "The field cannot be empty, please enter a name to search"
+        format.js { render partial: 'users/result' }
+      end
+    end
   end
 end

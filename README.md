@@ -46,8 +46,6 @@ https://jose-abel-finance-tracker.herokuapp.com/
 ### Acknowledgments
 Appreciate the teams at Udemy and the creator of the course Rob Percival since allows me to learn a lot of Ruby on Rails concepts and design principles.
 
-Thanks to Patrick Fore for sharing their work on Unsplash.
-
 ## 📝 License
 This project is MIT licensed.
 

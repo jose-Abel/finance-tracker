@@ -21,7 +21,13 @@ class Stock < ApplicationRecord
       end
     end
     
-    new(name: new_name, last_price: new_price, ticker: new_symbol)
+    begin
+      unless new_name.empty?
+        new(name: new_name, last_price: new_price, ticker: new_symbol)
+      end
+    rescue => exception
+      return nil
+    end
   end
   
   def listings
