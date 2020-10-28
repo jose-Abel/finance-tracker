@@ -7,5 +7,20 @@
     <strong>Name: </strong><%= @crypto.name %>
     <strong>Symbol: </strong><%= @crypto.ticker %>
     <strong>Price: </strong><%= @crypto.last_price %>
+
+    <% if current_user.can_track_crypto?(@crypto.name) %>
+      <%= link_to "Add to portfolio", user_stocks_path(user: current_user, name: @crypto.name, last_price: @crypto.last_price), class: "btn btn-success", method: :post %>
+    <% else %>
+      <span class = "badge badge-secondary">
+        You are already tracking
+        <% if !current_user.under_crypto_limit? %>
+          10 cryptos
+        <% end %>
+
+        <% if current_user.crypto_already_tracked?(@crypto.name) %>
+          this crypto
+        <% end %>
+      </span>
+    <% end %>
   </div>
 <% end %>

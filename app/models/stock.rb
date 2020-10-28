@@ -3,8 +3,12 @@ require 'net/http'
 require 'json'
 
 class Stock < ApplicationRecord
+  has_many :user_stocks
+  has_many :users, through: :user_stocks
 
-  def self.look_up(ticker_symbol)
+  validates :name, :ticker, presence: true
+
+  def self.look_up(symbol)
     new_name = ''
     new_symbol = ''
     new_price = 0
@@ -13,7 +17,7 @@ class Stock < ApplicationRecord
 
     coins_hash.each do |hash|
       hash.each do |name, price|
-        if ticker_symbol == name
+        if symbol == name
           new_name = name
           new_symbol = hash['symbol']
           new_price = price.round(2)
@@ -28,6 +32,10 @@ class Stock < ApplicationRecord
     rescue => exception
       return nil
     end
+  end
+
+  def self.check_db(symbol)
+    where(name: symbol).first
   end
   
   def listings
