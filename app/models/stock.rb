@@ -34,6 +34,21 @@ class Stock < ApplicationRecord
     end
   end
 
+  def self.updated_price(ticker_symbol)
+    new_price = 0
+    stocks = Stock.new
+    coins_hash = stocks.listings
+  
+    coins_hash.each do |hash|
+      hash.each do |name, price|
+        if ticker_symbol == name
+          new_price = price.round(2)
+        end
+      end
+    end
+    new_price
+  end
+
   def self.check_db(symbol)
     where(name: symbol).first
   end

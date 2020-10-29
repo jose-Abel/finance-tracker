@@ -14,7 +14,7 @@
             <tr>
               <th scope="row"><%= crypto.ticker %></th>
               <td><%= crypto.name %></td>
-              <td><%= crypto.last_price %></td>
+              <td id="last-price"><%= crypto.last_price %></td>
               <td>
                 <% if current_user.can_track_crypto?(crypto.name) %>
 
@@ -32,8 +32,10 @@
                 <% end %>
 
                 <% if current_user.id == @user.id %>
-                  <%= link_to "Remove", user_stock_path(crypto), method: :delete, data: {confirm: "Are you sure?" }, class: "btn btn-warning" %>                  
+                  <%= link_to "Remove", user_stock_path(crypto), method: :delete, data: {confirm: "Are you sure?" }, class: "btn btn-warning" %>
                 <% end %>
+
+                <%= link_to "Update price", update_price_path(name: crypto.name), method: :post, remote: true, class: "btn btn-success" %>
               </td>
             </tr>
           <% end %>

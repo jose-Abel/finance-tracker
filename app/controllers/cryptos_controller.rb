@@ -21,4 +21,13 @@ class CryptosController < ApplicationController
       end
     end
   end
+
+  def update
+    @crypto = Stock.look_up(params[:name])
+    
+    respond_to do |format|
+      format.js { render partial: 'stocks/price_result' }
+    end
+  end
+
 end
