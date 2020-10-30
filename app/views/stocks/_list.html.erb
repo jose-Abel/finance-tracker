@@ -1,0 +1,44 @@
+<div class="row">
+    <div class="col-9">
+      <table class="table table-bordered table-hover">
+        <thead>
+          <tr>
+            <th scope="col">Ticker</th>
+            <th scope="col">Name</th>
+            <th scope="col">Price</th>
+            <th scope="col">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @tracked_stocks.each do |crypto| %>
+            <tr>
+              <th scope="row"><%= crypto.ticker %></th>
+              <td><%= crypto.name %></td>
+              <td id="last-price"><%= crypto.last_price %></td>
+              <td>
+                <% if current_user.can_track_crypto?(crypto.name) %>
+
+                  <%= link_to "Add to portfolio", user_stocks_path(user: current_user, name: crypto.name, last_price: crypto.last_price), class: "btn btn-success", method: :post %>
+
+                <% elsif current_user.id != @user.id %>
+                  <span class = "badge badge-secondary">
+                    You are already tracking
+                    <% if !current_user.under_crypto_limit? %>
+                      10 cryptos
+                    <% elsif current_user.crypto_already_tracked?(crypto.name) %>
+                      this crypto
+                    <% end %>
+                  </span>
+                <% end %>
+
+                <% if current_user.id == @user.id %>
+                  <%= link_to "Remove", user_stock_path(crypto), method: :delete, data: {confirm: "Are you sure?" }, class: "btn btn-warning" %>
+                  <%= link_to "Update price", update_price_path(user: current_user, name: crypto.name, last_price: crypto.last_price, id: crypto.id), method: :post, remote: true, class: "btn btn-success" %>
+                <% end %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+</div>
