@@ -23,11 +23,11 @@ class CryptosController < ApplicationController
   end
 
   def update
-    @crypto = Stock.look_up(params[:name])
+    crypto = Stock.check_db(params[:name])
+    @updated_price = Stock.updated_price(params[:name])
+    crypto.last_price = @updated_price
+    crypto.save
     
-    respond_to do |format|
-      format.js { render partial: 'stocks/price_result' }
-    end
+    redirect_to my_portfolio_path
   end
-
 end

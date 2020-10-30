@@ -33,9 +33,8 @@
 
                 <% if current_user.id == @user.id %>
                   <%= link_to "Remove", user_stock_path(crypto), method: :delete, data: {confirm: "Are you sure?" }, class: "btn btn-warning" %>
+                  <%= link_to "Update price", update_price_path(user: current_user, name: crypto.name, last_price: crypto.last_price, id: crypto.id), method: :post, remote: true, class: "btn btn-success" %>
                 <% end %>
-
-                <%= link_to "Update price", update_price_path(name: crypto.name), method: :post, remote: true, class: "btn btn-success" %>
               </td>
             </tr>
           <% end %>
