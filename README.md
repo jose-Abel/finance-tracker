@@ -2,6 +2,8 @@
 
 A Finance Tracker web application built following the guide in the Udemy course "The Complete Ruby on Rails Developer Course" created by Rob Percival.
 
+![screenshot](./app_screenshot.png)
+
 ## Built With
 - HTML
 - CSS
